@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>New Chat</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/chat}" th:object="${chat}">
+    <label for="chatname">Имя чата</label>
+    <input type="text" th:field="*{chatname}" id="chatname">
+    <br>
+    <input type="submit" value="Создать чат">
+</form>
+
+</body>
+</html>

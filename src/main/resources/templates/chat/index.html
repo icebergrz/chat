@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+
+<body>
+<div th:each="chat : ${chats}">
+    <div>
+        <a th:href="@{/chat/{id}(id=${chat.id})}" th:text="${chat.chatname}">CHAT NAME</a>
+    </div>
+</div>
+
+<div>
+    <form th:action="@{/chat/new}" method="get">
+        <input type="submit" value="Создать новый чат">
+    </form>
+</div>
+
+<div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Выйти"/>
+    </form>
+</div>
+
+<div th:if="${selectedChat}">
+
+    <div th:each="message : ${messages}">
+        <p th:text="${message.messageText}"></p>
+    </div>
+
+    <form th:action="@{/chat/{id}(id=${selectedChat.id})}" method="post" th:object="${message}">
+        <label for="message"></label>
+        <input type="text" th:field="*{messageText}" id="message">
+        <br>
+        <input type="submit" value="Отправить">
+    </form>
+</div>
+
+</body>
+
+</html>
